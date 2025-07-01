@@ -69,5 +69,7 @@ module.exports = {
             console.error('Lỗi khi tìm thông tin máy chủ:', error);
             await interaction.reply('Đã xảy ra lỗi khi lấy thông tin máy chủ.');
         }
+    }
+  
     },
 };
