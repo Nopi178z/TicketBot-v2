@@ -25,13 +25,13 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('show-modmails')
-        .setDescription('Show all active modmails for this server'),
+        .setDescription('Hiển thị tất cả các modmail đang hoạt động cho máy chủ này'),
     
     async execute(interaction) {
         const modmailChannels = interaction.guild.channels.cache.filter(c => c.name.startsWith('modmail-'));
         
         if (modmailChannels.size === 0) {
-            return interaction.reply({ content: 'There are no active ModMail conversations.', ephemeral: true });
+            return interaction.reply({ content: 'Không có cuộc trò chuyện ModMail nào đang hoạt động.', ephemeral: true });
         }
 
         const embed = new EmbedBuilder()
