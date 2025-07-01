@@ -25,16 +25,16 @@ const { SlashCommandBuilder } = require('discord.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('close-ticket')
-        .setDescription('Close the current ticket'),
+        .setDescription('Đóng Ticket hiện tại'),
     async execute(interaction) {
         if (!interaction.channel.name.startsWith('ticket-')) {
             return interaction.reply({
-                content: 'You can only use this command in a ticket channel.',
+                content: 'Bạn chỉ có thể sử dụng lệnh này trong kênh ticket.',
                 ephemeral: true,
             });
         }
 
-        await interaction.reply({ content: 'Closing the ticket...' });
+        await interaction.reply({ content: 'Đang đóng ticket...' });
         await interaction.channel.delete();  
     },
 };
