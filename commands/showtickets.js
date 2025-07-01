@@ -25,7 +25,7 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('show-tickets')
-        .setDescription('Show all active tickets for this server'),
+        .setDescription('Hiển thị tất cả các vé đang hoạt động cho máy chủ này'),
     async execute(interaction) {
         const activeTickets = interaction.guild.channels.cache.filter(c => c.name.startsWith('ticket-'));
         if (activeTickets.size === 0) {
