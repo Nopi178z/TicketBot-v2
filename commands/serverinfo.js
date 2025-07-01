@@ -25,7 +25,7 @@ const { EmbedBuilder } = require('discord.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('server-info')
-        .setDescription('Show detailed information about the server'),
+        .setDescription('Hiển thị thông tin chi tiết về máy chủ'),
     async execute(interaction) {
         const server = interaction.guild;
         const emojis = server.emojis.cache;
@@ -38,7 +38,7 @@ module.exports = {
         try {
             const owner = await server.members.fetch(server.ownerId);
             if (!owner) {
-                throw new Error('Server owner not found.');
+                throw new Error('Không tìm thấy chủ sở hữu máy chủ.');
             }
 
             const boosters = server.premiumSubscriptionCount;
@@ -66,8 +66,8 @@ module.exports = {
 
             await interaction.reply({ embeds: [embed] });
         } catch (error) {
-            console.error('Error fetching server information:', error);
-            await interaction.reply('An error occurred while fetching server information.');
+            console.error('Lỗi khi tìm thông tin máy chủ:', error);
+            await interaction.reply('Đã xảy ra lỗi khi lấy thông tin máy chủ.');
         }
     },
 };
