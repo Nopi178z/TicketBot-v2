@@ -25,11 +25,11 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('show-tickets')
-        .setDescription('Hiển thị tất cả các vé đang hoạt động cho máy chủ này'),
+        .setDescription('Hiển thị tất cả các ticket đang hoạt động cho máy chủ này'),
     async execute(interaction) {
         const activeTickets = interaction.guild.channels.cache.filter(c => c.name.startsWith('ticket-'));
         if (activeTickets.size === 0) {
-            return interaction.reply({ content: 'There are no active tickets.', ephemeral: true });
+            return interaction.reply({ content: 'Không có ticket nào đang hoạt động.', ephemeral: true });
         }
 
         const embed = new EmbedBuilder()
