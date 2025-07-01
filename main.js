@@ -20,6 +20,7 @@
 */
 
 
+
 const { Client, GatewayIntentBits, Partials, Collection, REST, Routes } = require('discord.js');
 const fs = require('fs');
 const path = require('path');
@@ -84,8 +85,8 @@ client.once('ready', async () => {
     }
 });
 client.on('interactionCreate', async (interaction) => {
-    const interactionHandler = require('./events/interactionCreate');
-    await interactionHandler(interaction); 
+  const interactionHandler = require('./events/interactionCreate');
+  await interactionHandler(interaction); 
 });
 
 const tktHandler = require('./events/ticketHandler');
@@ -98,7 +99,7 @@ modmailHandler(client);
 
 const express = require("express");
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 app.get('/', (req, res) => {
   const imagePath = path.join(__dirname, 'index.html');
   res.sendFile(imagePath);
@@ -106,4 +107,5 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`🔗 Listening to Nopi : http://localhost:${port}`);
 });
+
 client.login(process.env.TOKEN);
