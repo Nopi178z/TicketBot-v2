@@ -25,14 +25,14 @@ module.exports = async (interaction) => {
         const command = interaction.client.commands.get(interaction.commandName);
 
         if (!command) {
-            return interaction.reply({ content: 'Command not found!', ephemeral: true });
+            return interaction.reply({ content: 'Lệnh không tìm thấy!', ephemeral: true });
         }
 
         try {
             await command.execute(interaction);
         } catch (error) {
             console.error(error);
-            await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+            await interaction.reply({ content: 'Đã xảy ra lỗi khi thực hiện lệnh này!', ephemeral: true });
         }
     }
 };
