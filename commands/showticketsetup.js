@@ -26,11 +26,11 @@ const { getTicketSetup } = require('../models/ticketSetup');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('show-ticketsetup')
-        .setDescription('Show the ticket system setup for this server'),
+        .setDescription('Hiển thị thiết lập hệ thống vé cho máy chủ này'),
     async execute(interaction) {
         const setup = await getTicketSetup(interaction.guildId);
         if (!setup) {
-            return interaction.reply({ content: 'No ticket system setup found for this server.', ephemeral: true });
+            return interaction.reply({ content: 'Không tìm thấy thiết lập hệ thống vé nào cho máy chủ này.', ephemeral: true });
         }
 
         const embed = new EmbedBuilder()
