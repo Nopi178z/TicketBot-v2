@@ -27,21 +27,21 @@ module.exports = async (client) => {
                     if (existingMessages.size === 0) {
                         const embed = new EmbedBuilder()
                         .setAuthor({
-                            name: "Ticket System",
+                            name: "Nô Lệ Bán Hàng",
                             iconURL: Icons.ticketIcon,
-                            url: "https://discord.gg/xQF9f9yUEM"
+                            url: " https://discord.gg/NwtBUA7njn"
                         })
-                        .setDescription('- Please click the button below to create a new ticket.\n\n' +
-                            '**Ticket Rules:**\n' +
-                            '- Fill in all the fields accurately.\n' +
-                            '- Be patient while waiting for a response from our support team.')
-                        .setFooter({ text: 'At your service!', iconURL: Icons.modIcon })
-                        .setColor('#00FF00'); 
+                        .setDescription('- Vui lòng nhấp vào nút bên dưới để tạo ticket mua hàng.\n\n' +
+                            '**Dùng ticket để:**\n' +
+                            '- Mua hàng / hỏi giá / thông tin sản phẩm\n' +
+                            '- Hãy kiên nhẫn trong khi chờ đợi phản hồi từ Shop của tui.')
+                        .setFooter({ text: 'Sẵn sàng phục vụ bạn!', iconURL: Icons.modIcon })
+                        .setColor('#FCB6FD'); 
                         
 
                         const button = new ButtonBuilder()
                             .setCustomId('create_ticket')
-                            .setLabel('Open Ticket')
+                            .setLabel('Mua Hàng')
                             .setStyle(ButtonStyle.Primary);
 
                         const row = new ActionRowBuilder().addComponents(button);
@@ -65,17 +65,17 @@ module.exports = async (client) => {
             if (interaction.customId === 'create_ticket') {
                 const modal = new ModalBuilder()
                     .setCustomId('ticket_modal')
-                    .setTitle('Create a Support Ticket');
+                    .setTitle('Hỗ Trợ');
 
                 const subjectInput = new TextInputBuilder()
                     .setCustomId('ticket_subject')
-                    .setLabel('Subject of your Ticket')
+                    .setLabel('Chủ đề ticket của bạn')
                     .setStyle(TextInputStyle.Short)
                     .setRequired(true);
 
                 const descriptionInput = new TextInputBuilder()
                     .setCustomId('ticket_description')
-                    .setLabel('Description of your Issue')
+                    .setLabel('Mô tả vấn đề của bạn')
                     .setStyle(TextInputStyle.Paragraph)
                     .setRequired(true);
 
@@ -101,7 +101,7 @@ module.exports = async (client) => {
                 const setup = await getTicketSetup(interaction.guildId);
                 const existingTicket = interaction.guild.channels.cache.find(c => c.name === `ticket-${interaction.user.username}`);
                 if (existingTicket) {
-                    return await interaction.followUp({ content: 'You already have an open ticket! If not please contact staff.', ephemeral: true });
+                    return await interaction.followUp({ content: 'Bạn đã tạo ticket! Nếu chưa, vui lòng liên hệ với Shop.', ephemeral: true });
                 }
 
                 const ticketChannel = await interaction.guild.channels.create({
@@ -118,13 +118,13 @@ module.exports = async (client) => {
 
                 const openEmbed = new EmbedBuilder()
                     .setAuthor({
-                        name: "Ticket Created Successfully",
+                        name: "Đã tạo ticket thành công",
                         iconURL: Icons.tickIcon,
-                        url: "https://discord.gg/nuWzGbu8De"
+                        url: "https://discord.gg/NwtBUA7njn"
                     })
-                    .setDescription(`Your ticket channel: ${ticketChannel.url}`)
-                    .setFooter({ text: 'Ticket Bot V2!', iconURL: Icons.modIcon })
-                    .setColor('#00FF00'); 
+                    .setDescription(`Kênh ticket của bạn: ${ticketChannel.url}`)
+                    .setFooter({ text: 'Nô Lệ Bán Hàng', iconURL: Icons.modIcon })
+                    .setColor('#FCB6FD'); 
 
                 await interaction.user.send({ embeds: [openEmbed] });
 
@@ -132,7 +132,7 @@ module.exports = async (client) => {
                     .setTitle(`Sub: ${subject}`)
                     .setDescription(description)
                     .setColor('#FFFF00')
-                    .setFooter({ text: `Created by ${interaction.user.username}` });
+                    .setFooter({ text: `Tạo bởi ${interaction.user.username}` });
 
                 const row = new ActionRowBuilder()
                     .addComponents(
@@ -143,7 +143,7 @@ module.exports = async (client) => {
 
                 await ticketChannel.send({ content: `<@${interaction.user.id}>`, embeds: [embed], components: [row] });
 
-                await interaction.followUp({ content: 'Your ticket has been created!', ephemeral: true });
+                await interaction.followUp({ content: 'Ticket của bạn đã được tạo!', ephemeral: true });
             }
         }
 
@@ -151,22 +151,22 @@ module.exports = async (client) => {
         if (interaction.isButton()) {
             if (interaction.customId === 'close_ticket') {
                 if (!interaction.channel.name.startsWith('ticket-')) {
-                    return await interaction.reply({ content: 'You can only use this command in a ticket channel.', ephemeral: true });
+                    return await interaction.reply({ content: 'Bạn chỉ có thể sử dụng lệnh này trong ticket.', ephemeral: true });
                 }
 
-                await interaction.reply({ content: 'Closing the ticket...' });
+                await interaction.reply({ content: 'Đang đóng ticket...' });
                 await interaction.channel.delete();
             } else if (interaction.customId === 'ping_admin') {
                 const setup = await getTicketSetup(interaction.guildId);
                 const adminRoleMentions = setup.adminRoleIds.map(roleId => `<@&${roleId}>`).join(', ');
-                await interaction.channel.send(`- Attention ${adminRoleMentions}! A user has requested assistance in this ticket.`);
-                await interaction.reply({ content: 'Admins have been notified.', ephemeral: true });
+                await interaction.channel.send(`- Attention ${adminRoleMentions}! Thượng đế đã tạo ticket cầu hỗ trợ.`);
+                await interaction.reply({ content: 'Chủ Shop đã được thông báo.', ephemeral: true });
             } else if (interaction.customId === 'ticket_info') {
                 const embed = new EmbedBuilder()
-                    .setTitle(`Ticket Information`)
-                    .setDescription(`Ticket created by: <@${interaction.user.id}>`)
-                    .addFields({ name: 'Ticket Channel:', value: interaction.channel.name })
-                    .setColor('#00FF00');
+                    .setTitle(`Thông tin ticket`)
+                    .setDescription(`Ticket tạo bởi: <@${interaction.user.id}>`)
+                    .addFields({ name: 'Ticket mua hàng:', value: interaction.channel.name })
+                    .setColor('#FCB6FD');
 
                 await interaction.reply({ embeds: [embed], ephemeral: true });
             }
