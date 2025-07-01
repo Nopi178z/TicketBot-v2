@@ -35,13 +35,13 @@ module.exports = async (client) => {
         const setup = await getModmailSetup(guildId);
 
         if (!setup || !setup.modmailSystemEnabled) {
-            return message.author.send("The ModMail system is not enabled.");
+            return message.author.send("Hệ thống ModMail không được kích hoạt.");
         }
 
     
         const guild = client.guilds.cache.get(guildId);
         if (!guild) {
-            return message.author.send("Error: Unable to find the guild.");
+            return message.author.send("Lỗi: Không tìm thấy hội nhóm.");
         }
 
    
@@ -71,7 +71,7 @@ module.exports = async (client) => {
         
         const embed = new EmbedBuilder()
             .setTitle(`Mail from ${message.author.tag}`)
-            .setDescription(`User **${message.author}** has initiated a Mail conversation.`)
+            .setDescription(`User **${message.author}** đã bắt đầu cuộc trò chuyện qua Mail.`)
             .setColor('#FFFF00');
 
         const closeButton = new ButtonBuilder()
@@ -89,9 +89,9 @@ module.exports = async (client) => {
             iconURL: Icons.tick2Icon,
             url: "https://discord.gg/xQF9f9yUEM"
         })
-        .setDescription(`Mail has been started. You can now chat with the staff.`)
-        .setColor('Green')
-        .setFooter({ text: 'Ticket Bot V2!', iconURL: Icons.modIcon });
+        .setDescription(`Đã bắt đầu ticket. Bây giờ bạn có thể trò chuyện với Shop.`)
+        .setColor('Pink')
+        .setFooter({ text: 'Nopi Bán Hàng', iconURL: Icons.modIcon });
         message.author.send({ embeds: [Embed]});
     });
 
@@ -111,7 +111,7 @@ module.exports = async (client) => {
                     await user.send(`**${message.author.tag} (Staff):** ${message.content}`);
                 } catch (error) {
                     //console.error(`Error sending message to ${user.tag}:`, error);
-                    message.channel.send('Failed to send message to the user.');
+                    message.channel.send('Không gửi được tin nhắn cho người dùng.');
                 }
             }
         }
@@ -134,9 +134,9 @@ module.exports = async (client) => {
                 .setAuthor({
                     name: "Mail Alert",
                     iconURL: Icons.tick2Icon,
-                    url: "https://discord.gg/xQF9f9yUEM"
+                    url: " https://discord.gg/NwtBUA7njn"
                 })
-                .setDescription('Your Mail conversation has been closed by the staff. Thank you for reaching out.')
+                .setDescription('Cuộc trò chuyện Mail của bạn đã bị nhân viên đóng lại. Cảm ơn bạn đã liên hệ.')
                 .setColor('Red')
                 .setFooter({ text: 'Ticket Bot V2!', iconURL: Icons.modIcon });
                 await user.send({ embeds: [embed]});
