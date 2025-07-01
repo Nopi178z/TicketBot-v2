@@ -25,20 +25,20 @@ const { setTicketSetup } = require('../models/ticketSetup');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('setup-ticket')
-        .setDescription('Configure the ticket system for this server')
+        .setDescription('Cấu hình hệ thống ticket cho máy chủ này')
         .addChannelOption(option =>
             option.setName('channel')
-                .setDescription('The channel to send the ticket creation button')
+                .setDescription('Kênh gửi nút tạo ticket')
                 .setRequired(true)
         )
         .addStringOption(option =>
             option.setName('admin-roles')
-                .setDescription('Comma-separated list of admin role IDs who can manage tickets')
+                .setDescription('Danh sách phân tách bằng dấu phẩy của ID vai trò quản trị viên có thể quản lý phiếu')
                 .setRequired(true)
         )
         .addBooleanOption(option =>
             option.setName('enabled')
-                .setDescription('Enable or disable the ticket system')
+                .setDescription('Bật hoặc tắt hệ thống vé')
                 .setRequired(true)
         ),
 
@@ -56,7 +56,7 @@ module.exports = {
 
           
             await interaction.followUp({
-                content: `Ticket system configuration saved! Ticket system is now **${enabled ? 'enabled' : 'disabled'}**.`,
+                content: `Cấu hình hệ thống vé đã được lưu! Hệ thống vé hiện đã **${enabled ? 'enabled' : 'disabled'}**.`,
                 ephemeral: true
             });
         } catch (error) {
@@ -64,7 +64,7 @@ module.exports = {
 
          
             await interaction.followUp({
-                content: `An error occurred while saving the ticket system configuration. Please try again.`,
+                content: `Đã xảy ra lỗi khi lưu cấu hình hệ thống vé. Vui lòng thử lại.`,
                 ephemeral: true
             });
         }
