@@ -62,7 +62,7 @@ client.once('ready', async () => {
                 { body: commands }
             );
         }
-        console.log('\x1b[36m[ COMMANDS ]\x1b[0m', 'Successfully registered commands for all guilds');
+        console.log('\x1b[36m[ COMMANDS ]\x1b[0m', 'Đã đăng ký lệnh thành công cho tất cả các guild');
     } catch (error) {
         console.error('Error registering commands:', error);
     }
@@ -104,6 +104,6 @@ app.get('/', (req, res) => {
   res.sendFile(imagePath);
 });
 app.listen(port, () => {
-  console.log(`🔗 Listening to GlaceYT : http://localhost:${port}`);
+  console.log(`🔗 Listening to Nopi : http://localhost:${port}`);
 });
 client.login(process.env.TOKEN);
