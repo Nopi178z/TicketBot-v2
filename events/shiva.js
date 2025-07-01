@@ -22,7 +22,7 @@
 
 const status = "AUTOMATIC";
 const botName = "🎟️ TICKET BOT";
-const Text = "GlaceYT";
+const Text = "Nopi";
 const version = "Latest@ v1.0"; 
 const startTime = Date.now();
 
