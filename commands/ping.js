@@ -39,7 +39,6 @@ module.exports = {
             .setTitle('Pong! 🏓')
             .setDescription(`Bot Latency: ${botLatency}ms\nAPI Latency: ${apiLatency}ms`)
             .setTimestamp();
-
-        await interaction.reply({ embeds: [embed] });
-    },
+      await interaction.reply({ embeds: [embed] });
+  }
 };
