@@ -26,20 +26,20 @@ const { setModmailSetup } = require('../models/modmailSetup');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('setup-modmail')
-        .setDescription('Configure the ModMail system for this server')
+        .setDescription('Cấu hình hệ thống ModMail cho máy chủ này')
         .addChannelOption(option =>
             option.setName('category')
-                .setDescription('Category to create ModMail channels in')
+                .setDescription('Thể loại để tạo kênh ModMail trong')
                 .setRequired(true)
         )
         .addStringOption(option =>
             option.setName('admin-roles')
-                .setDescription('Comma-separated list of admin role IDs who can manage modmail')
+                .setDescription('Danh sách phân tách bằng dấu phẩy của ID vai trò quản trị viên có thể quản lý modmail')
                 .setRequired(true)
         )
         .addBooleanOption(option =>
             option.setName('enabled')
-                .setDescription('Enable or disable the ModMail system')
+                .setDescription('Bật hoặc tắt hệ thống ModMail')
                 .setRequired(true)
         ),
     
@@ -53,7 +53,7 @@ module.exports = {
         await setModmailSetup(interaction.guildId, category.id, adminRoles, enabled);
 
         await interaction.followUp({
-            content: `ModMail system configuration saved! ModMail is now **${enabled ? 'enabled' : 'disabled'}**.`,
+            content: `Cấu hình hệ thống ModMail đã được lưu! ModMail hiện đã **${enabled ? 'enabled' : 'disabled'}**.`,
             ephemeral: true
         });
     }
